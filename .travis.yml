@@ -29,7 +29,7 @@ before_script:
   - bundle exec rake db:migrate test:prepare
 
 script:
-  - bundle exec rspec spec -fd
+  #- bundle exec rspec spec -fd
   - bundle exec rubocop app spec -R --format simple
 
 cache:
