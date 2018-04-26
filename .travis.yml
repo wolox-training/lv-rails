@@ -1,12 +1,10 @@
-anguage: ruby
+language: ruby
 rvm:
   - 2.4.0
 
-addons:
-  code_climate:
-    #repo_token: 89943dcf9eece00c7e360730a4a6102b1ce29c1b9956186bf4801ad059169274
-    # lucas.voboril@wolox.com.ar comento esta linea porque no sabe lo que es
-    # Si alguno sabe que es, lucas solicita informacion
+#addons:
+#  code_climate:
+#    repo_token: 89943dcf9eece00c7e360730a4a6102b1ce29c1b9956186bf4801ad059169274
 
 env:
   global:
@@ -25,21 +23,14 @@ before_install:
   - gem update --system
 
 before_script:
-  - cp config/database.travis.yml config/database.yml
   - psql -c "CREATE USER \"wbooks_api\" WITH PASSWORD 'wbooks_api';" -U postgres
   - psql -c "DROP DATABASE IF EXISTS \"wbooks_api_test\";" -U postgres
   - psql -c "CREATE DATABASE \"wbooks_api_test\" ENCODING 'utf8';" -U postgres
-  - bundle exec rake db:migrate
+  - bundle exec rake db:migrate test:prepare
 
 script:
   - bundle exec rspec spec -fd
   - bundle exec rubocop app spec -R --format simple
-  - bundle exec scss-lint app/assets/stylesheets/
-
-#notifications:
-#  email:
-#    recipients:
-#      - lucas.voboril@wolox.com.ar
 
 cache:
   bundler: true

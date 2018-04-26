@@ -1,5 +1,0 @@
-test: &test
-adapter: postgresql
-encoding: utf8
-database: rails-wbooks_api_test
-username: postgres
