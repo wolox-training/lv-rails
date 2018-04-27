@@ -40,6 +40,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'rubocop', '~> 0.55.0', require: false
 gem 'rubocop-rspec', '1.10.0'
 
+# Devise to authenticate users
+gem 'devise', git: 'git://github.com/plataformatec/devise.git'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
