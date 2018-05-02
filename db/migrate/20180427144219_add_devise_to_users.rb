@@ -2,7 +2,8 @@
 
 class AddDeviseToUsers < ActiveRecord::Migration[5.1]
   def self.up
-    change_table :users do |t|
+    create_table :users do |t|
+        
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -34,9 +35,9 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.1]
 
 
       ## Extra
-      t.string first_name
-      t.string last_name
-
+      t.string :first_name
+      t.string :last_name
+      t.timestamps
       # Uncomment below if timestamps were not included in your original model.
       # t.timestamps null: false
     end
