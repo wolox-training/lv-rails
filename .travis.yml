@@ -1,6 +1,4 @@
 language: ruby
-rvm:
-  - 2.4.0
 
 #addons:
 #  code_climate:
@@ -17,9 +15,6 @@ services:
   - redis-server
 
 before_install:
-  - "echo '--colour' > ~/.rspec"
-  - "echo 'gem: --no-document' > ~/.gemrc"
-  # Solves rainbow issue: https://github.com/sickill/rainbow/issues/48
   - gem update --system
 
 before_script:

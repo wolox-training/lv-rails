@@ -1,17 +1,1 @@
 <h1>User#index</h1>
-<table>
-  <tr>
-    <th>Username</th>
-    <th>Lastname</th>
-    <th>Email</th>
-  </tr>
-  <% User.all.each do |anUser| %>
-  <tr>
-    <td> <%= anUser.first_name %> </td>
-    <td> <%= anUser.last_name %> </td>
-    <td> <%= anUser.email %> </td>
-  <% end %>
-  <% if User.all.size == 0 %>
-  <em>No users found</em>
-  <% end %>
-</table>
