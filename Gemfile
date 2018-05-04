@@ -3,6 +3,10 @@ source 'https://rubygems.org'
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
+
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+    gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => "#{repo_name}"
+  end
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -53,6 +57,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Env for datebase
   gem 'dotenv-rails', '~> 2.4.0'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do
