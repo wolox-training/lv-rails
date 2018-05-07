@@ -215,12 +215,8 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
-<<<<<<< HEAD
   devise (~> 4.4.3)
-=======
-  devise!
   devise_token_auth
->>>>>>> 12c744c... Wrong char: change lame for name
   dotenv-rails (~> 2.4.0)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
