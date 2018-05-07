@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe User do
-  
   subject(:user) do
     User.new(
       first_name: first_name, last_name: last_name, email: email, password: password,
@@ -17,8 +16,8 @@ describe User do
 
   context 'With an empty user' do
     it '#attr_getters' do
-      %w[first_name last_name].each do |unAtr|
-        expect(user.attributes.keys).to include(unAtr)
+      %w[first_name last_name].each do |un_atr|
+        expect(user.attributes.keys).to include(un_atr)
       end
     end
 

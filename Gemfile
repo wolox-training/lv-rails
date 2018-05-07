@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 
   %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
-    gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => "#{repo_name}"
+    gem lib, git: "https://github.com/rspec/#{lib}.git", branch: repo_name.to_s
   end
 end
 
@@ -62,8 +62,8 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 1.7.0'
-  gem 'faker', '~> 1.8.7' 
   gem 'factory_bot', '~> 4.8.2'
+  gem 'faker', '~> 1.8.7'
 end
 
 group :development do
