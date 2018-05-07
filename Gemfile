@@ -60,6 +60,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
 end
 
+group :test do
+  gem 'database_cleaner', '~> 1.7.0'
+  gem 'faker', '~> 1.8.7' 
+  gem 'factory_bot', '~> 4.8.2'
+end
+
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
