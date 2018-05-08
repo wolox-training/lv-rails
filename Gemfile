@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Rubocop gem
-gem 'rubocop', '~> 0.55.0', require: false
+gem 'rubocop', '~> 0.50.0'
 gem 'rubocop-rspec', '1.10.0'
 
 # Devise to authenticate users
