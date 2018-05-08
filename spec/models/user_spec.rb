@@ -29,8 +29,8 @@ describe 'User' do
   describe '#generate_verification_code' do
     context 'When the user is created' do
       it 'generates a random verification code' do
-        anUser.save!
-        expect(anUser.verification_code).to be_present
+        user.save!
+        expect(user.id).to be_present
       end
     end
   end
