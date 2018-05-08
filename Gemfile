@@ -43,7 +43,7 @@ gem 'rubocop-rspec', '1.10.0'
 # Devise to authenticate users
 gem 'devise', '~> 4.4.3'
 
-gem 'devise_token_auth'
+gem 'devise_token_auth', '~> 0.1.43'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
