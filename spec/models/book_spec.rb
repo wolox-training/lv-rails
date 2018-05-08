@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Book do
+describe 'Book' do
   subject(:unLibro) { Book.new }
 
   context 'With an empty book' do

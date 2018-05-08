@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User do
+describe 'User' do
   subject(:user) do
     User.new(
       first_name: first_name, last_name: last_name, email: email, password: password,
