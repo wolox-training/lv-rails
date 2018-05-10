@@ -1,15 +1,11 @@
 require 'rails_helper'
 
 describe 'Book' do
-
-  before(:all) do
-    @book1 = create(:book)
-  end
   subject(:book) { create(:book) }
 
-  context 'Faker and Factory test' do
+  context 'Create a book with Faker' do
     it do
-      expect(book.attributes).to be_present
+      # It's strange but the model tells year is a String
+      expect(book.year).to be_instance_of(String)
     end
-  end
 end

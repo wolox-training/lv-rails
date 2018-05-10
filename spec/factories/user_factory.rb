@@ -6,14 +6,4 @@ FactoryBot.define do
     password 'password1234'
     password_confirmation 'password1234'
   end
-
-  factory :book do
-    genre { Faker::Book.genre }
-    author { Faker::Book.author }
-    title { Faker::Book.title }
-    publisher { Faker::Book.publisher }
-    image { Faker::Book.title }
-    year { Faker::Date.year }
-  end
-
 end
