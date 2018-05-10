@@ -1,9 +1,12 @@
 class AddNullConstraintToBook < ActiveRecord::Migration[5.1]
   def change
     change_table(:books) do
-      %i[genre author image title publisher year].each do |attr|
-        change_column_null :books, attr, false
-      end
+      change_column_null :books, :genre, false
+      change_column_null :books, :author, false
+      change_column_null :books, :image, false
+      change_column_null :books, :title, false
+      change_column_null :books, :publisher, false
+      change_column_null :books, :year, false
     end
   end
 end
