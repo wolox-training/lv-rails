@@ -1,5 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Rent, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Rent do
+  # To execute this test I need to have approved 
+  # previous PRs, becouse in this branch i had a bad
+  # bad configuration to execute rspec
 end
