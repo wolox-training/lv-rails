@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Book' do
+describe Book do
   subject(:book) { create(:book) }
 
   context 'Create a book with Faker' do

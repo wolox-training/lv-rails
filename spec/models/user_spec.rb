@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User' do
+describe User do
   subject(:user) { create(:user) }
 
   context 'User#create with Factory and Faker' do
