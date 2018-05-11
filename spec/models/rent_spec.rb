@@ -1,7 +1,17 @@
 require 'rails_helper'
 
 describe Rent do
-  # To execute this test I need to have approved
-  # previous PRs, becouse in this branch i had a bad
-  # bad configuration to execute rspec
+  subject(:rent) { build(:rent) }
+  
+  it { is_expected.to be_valid }
+
+  context 'validates not null fields' do
+    it { rent.validates_presence_of :user }
+    it { rent.validates_presence_of :book }
+    it { rent.validates_presence_of :from }
+    it { rent.validates_presence_of :to }
+  end
+
+  it {expect(rent.from).to <=(rent.to) }
+
 end
