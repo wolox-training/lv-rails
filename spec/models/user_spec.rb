@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 describe User do
-  subject(:user) { create(:user) }
+  subject(:user) { build(:user) }
 
-  context 'User#create with Factory and Faker' do
-    it 'Generates a random verification code' do
-      user.save!
-      expect(user.id).to be_present
-    end
+  it { is_expected.to be_valid }
+
+  context 'validates not null fields' do
+    it { user.validates_presence_of :first_name }
+    it { user.validates_presence_of :last_name }
   end
 end

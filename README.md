@@ -11,6 +11,9 @@ https://github.com/DatabaseCleaner/database_cleaner
 Matchers
 https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
 
+Shoulda_matchers
+https://github.com/thoughtbot/shoulda-matchers
+
 # Env setup
 Rubocop
 https://github.com/bbatsov/rubocop
@@ -22,6 +25,9 @@ To install rails
 https://gorails.com/setup/ubuntu/17.10
 
 # Others
+Migration doc
+http://edgeguides.rubyonrails.org/active_record_migrations.html
+
 Estimaciones
 https://docs.google.com/presentation/d/1X8SazyxbT1-EVJcLWzZk7Rcn80PRuEbdjyjlJEF8nfY/edit#slide=id.g15609935eb_1_183
 
