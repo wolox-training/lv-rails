@@ -2,8 +2,8 @@ class BookController < ApplicationController
   include Wor::Paginate
 
   def index
-    render_paginated Book
-    @books = Book.filter(params.slice(:genre, :title, :author, :description))
+    @books = Book.filter(params.require(:book).permit(%i[genre title author]))
+    render_paginated @books, each_serializer: BookSerializer
   end
 
   def show
