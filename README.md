@@ -1,24 +1,39 @@
-# README
+# Test
+Factory bot -> To create factories
+https://github.com/thoughtbot/factory_bot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Faker -> To randoms values
+https://github.com/stympy/faker
 
-Things you may want to cover:
+Database cleaner -> To clean up
+https://github.com/DatabaseCleaner/database_cleaner
 
-* Ruby version
+Matchers
+https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
 
-* System dependencies
+Shoulda_matchers
+https://github.com/thoughtbot/shoulda-matchers
 
-* Configuration
+# Env setup
+Rubocop
+https://github.com/bbatsov/rubocop
 
-* Database creation
+To install postgresql
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04
 
-* Database initialization
+To install rails
+https://gorails.com/setup/ubuntu/17.10
 
-* How to run the test suite
+# Others
+Migration doc
+http://edgeguides.rubyonrails.org/active_record_migrations.html
 
-* Services (job queues, cache servers, search engines, etc.)
+Estimaciones
+https://docs.google.com/presentation/d/1X8SazyxbT1-EVJcLWzZk7Rcn80PRuEbdjyjlJEF8nfY/edit#slide=id.g15609935eb_1_183
 
-* Deployment instructions
+Apiary doc
+https://wbooksapi.docs.apiary.io/#
 
-* ...
+Rails tutorial
+http://guides.rubyonrails.org/getting_started.html#creating-the-blog-application
+

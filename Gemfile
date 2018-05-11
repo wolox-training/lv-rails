@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
-  "https://github.com/#{repo_name}.git"
-end
-
+gem 'rspec', '~> 3.7.0'
+gem 'rspec-mocks', '~> 3.7.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
 # Use sqlite3 as the database for Active Record
@@ -53,6 +50,15 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Env for datebase
   gem 'dotenv-rails', '~> 2.4.0'
+  gem 'rspec-rails', '~> 3.7'
+end
+
+group :test do
+  gem 'database_cleaner', '~> 1.7.0'
+  gem 'factory_bot_rails', '~> 4.0'
+  gem 'faker', '~> 1.8.7'
+  gem 'rails-controller-testing', '~> 1.0.2'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
