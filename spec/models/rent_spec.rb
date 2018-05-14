@@ -2,16 +2,13 @@ require 'rails_helper'
 
 describe Rent do
   subject(:rent) { build(:rent) }
-  
+
   it { is_expected.to be_valid }
 
-  context 'validates not null fields' do
-    it { rent.validates_presence_of :user }
-    it { rent.validates_presence_of :book }
-    it { rent.validates_presence_of :from }
-    it { rent.validates_presence_of :to }
-  end
+  it { is_expected.to validate_presence_of :user }
+  it { is_expected.to validate_presence_of :book }
+  it { is_expected.to validate_presence_of :from }
+  it { is_expected.to validate_presence_of :to }
 
-  it {expect(rent.from).to <=(rent.to) }
-
+  it { expect(rent.from).to be <= rent.to }
 end
