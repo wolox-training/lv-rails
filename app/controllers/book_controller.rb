@@ -7,6 +7,6 @@ class BookController < ApplicationController
   end
 
   def show
-    @book = Book.filter(params.slice(id))
+    @book = Book.filter(params.require(:book).permit(:id))
   end
 end
