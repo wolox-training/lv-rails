@@ -1,4 +1,5 @@
 require 'rails_helper'
+require './spec/context/authenticated_user.rb'
 
 describe 'BooksController' do
 
