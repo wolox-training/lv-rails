@@ -11,8 +11,7 @@ describe BookController do
       end
 
       it 'with an empty book param' do
-        expect { get :index, params: { book: {} } }.to
-        raise_error ActionController::ParameterMissing
+        expect { get :index, params: { book: {} } }.to raise_error ActionController::ParameterMissing
       end
 
       def full_index_response
