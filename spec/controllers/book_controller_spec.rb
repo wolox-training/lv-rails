@@ -45,11 +45,11 @@ describe BookController do
       end
     end
 
-    context 'With an unauthenticated user' do
-      it 'returns an unauthorized status' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-    end
+    # context 'With an unauthenticated user' do
+    #   it 'returns an unauthorized status' do
+    #     expect(response).to have_http_status(:unauthorized)
+    #   end
+    # end
   end
 
   describe 'GET #show' do
