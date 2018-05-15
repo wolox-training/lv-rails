@@ -16,7 +16,7 @@ Documentation:
   Enabled: false
 
 LineLength:
-  Max: 99
+  Max: 110
 
 HasAndBelongsToMany:
   Enabled: false
