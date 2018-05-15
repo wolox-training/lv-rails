@@ -10,5 +10,6 @@ class BookController < ApplicationController
 
   def show
     @book = Book.filter(params.require(:book).permit(:id))
+    render_paginated @book
   end
 end
