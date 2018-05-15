@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Rubocop gem
 gem 'rubocop', '~> 0.50.0'
-gem 'rubocop-rspec', '1.10.0'
+gem 'rubocop-rspec', '~> 1.18.0'
 
 # Devise to authenticate users
 gem 'devise', '~> 4.4.3'
