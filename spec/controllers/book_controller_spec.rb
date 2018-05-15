@@ -11,10 +11,11 @@ describe BookController do
       end
 
       it 'with an empty book param' do
-        expect { get :index, params: { book: {} } }.to raise_error ActionController::ParameterMissing
+        expect { get :index, params: { book: {} } }.to
+        raise_error ActionController::ParameterMissing
       end
 
-      it 'adding additional params' do
+      def full_index_response
         b = books.first
         get :index, params: { book: {
           genre: b.genre,
@@ -25,6 +26,10 @@ describe BookController do
           publisher: b.publisher,
           year: b.year
         } }
+      end
+
+      it 'adding additional params' do
+        full_index_response
         expect(response).to have_http_status(:ok)
       end
     end
