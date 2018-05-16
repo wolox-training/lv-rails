@@ -5,6 +5,7 @@ class RentController < ApplicationController
 
   def create
     @rent = Rent.create(params[:tweet])
+    render json: @rent, status: 201
   end
 
   def index

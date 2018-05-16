@@ -12,11 +12,11 @@ describe RentController do
     context 'With an authenticated user' do
       include_context 'Authenticated User'
 
-      it 'returns a 204 ok status' do
-        # 204: The server has successfully fulfilled the request and that
-        # there is no additional content to send in the response payload body.
+      it 'returns a 201 ok status' do
+        # 201: The request has been fulfilled and has resulted 
+        # in one or more new resources being created.
         post :create, params: { rent: create(:rent) }
-        expect(response).to have_http_status(:no_content)
+        expect(response).to have_http_status(:created)
       end
     end
   end
