@@ -13,7 +13,7 @@ describe RentController do
       include_context 'Authenticated User'
 
       it 'returns a 201 ok status' do
-        # 201: The request has been fulfilled and has resulted 
+        # 201: The request has been fulfilled and has resulted
         # in one or more new resources being created.
         post :create, params: { rent: create(:rent) }
         expect(response).to have_http_status(:created)
