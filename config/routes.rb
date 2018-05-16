@@ -8,4 +8,9 @@ Rails.application.routes.draw do
     resources :book, only: [:show, :index]
   end
 
+  authenticate :user do
+    get '/rents' => 'rent#index'
+    post '/rent' => 'rent#create'
+  end
+
 end

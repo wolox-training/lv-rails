@@ -14,7 +14,7 @@ describe BookController do
         expect { get :index, params: { book: {} } }.to raise_error ActionController::ParameterMissing
       end
 
-      def full_index_response
+      def full_index_requiere
         b = books.first
         get :index, params: { book: {
           genre: b.genre,
@@ -28,12 +28,12 @@ describe BookController do
       end
 
       it 'adding additional params' do
-        full_index_response
+        full_index_requiere
         expect(response).to have_http_status(:ok)
       end
     end
 
-    def index_response
+    def index_requiere
       b = books.first
       get :index, params: { book: {
         genre: b.genre,
@@ -45,14 +45,14 @@ describe BookController do
     context 'With an authenticated user' do
       include_context 'Authenticated User'
       it 'returns a 200 ok status' do
-        index_response
+        index_requiere
         expect(response).to have_http_status(:ok)
       end
     end
 
     context 'With an unauthenticated user' do
       it 'returns an unauthorized status' do
-        index_response
+        index_requiere
         expect(response).to have_http_status(:unauthorized)
       end
     end
