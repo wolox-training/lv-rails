@@ -1,8 +1,14 @@
-class BookController < ApplicationController
+class BookController < ApiController
   include Wor::Paginate
 
+  before_action :authenticate_request!, only: %i[show index]
+
   def index
-    books = Book.filter(params.require(:book).permit(%i[genre title author]))
+    books = if params['book'].present?
+              Book.filter(params.require(:book).permit(%i[genre title author]))
+            else
+              Book.all
+            end
     render_paginated books, each_serializer: BookSerializer
   end
 
