@@ -57,7 +57,7 @@ describe BookController do
   describe 'GET #show' do
     context 'With an unauthenticated user' do
       it 'returns an unauthorized status' do
-        get :show, params: {}
+        get :show, params: { id: books.first.id }
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -66,8 +66,13 @@ describe BookController do
       include_context 'Authenticated User'
 
       it 'responds with 200 status' do
-        get :show, params: { book: { id: books.first.id } }
+        get :show, params: { id: books.first.id }
         expect(response).to have_http_status(:ok)
+      end
+
+      it 'shows only 1 book' do
+        get :show, params: { id: books.first.id }
+        expect(JSON.parse(response.body).size).to eq(1)
       end
 
       def unique_id
@@ -77,7 +82,7 @@ describe BookController do
       end
 
       it 'With an incorrect id' do
-        expect { get :show, params: { book: { id: unique_id } } }.to raise_error ActiveRecord::RecordNotFound
+        expect { get :show, params: { id: unique_id } }.to raise_error ActiveRecord::RecordNotFound
       end
     end
   end

@@ -13,7 +13,7 @@ class BookController < ApiController
   end
 
   def show
-    book = Book.find(params[:book][:id])
+    book = Book.find(params[:id])
     render json: book, status: 200
   end
 end
