@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe BookController do
+describe BooksController do
   let!(:books) { create_list(:book, 3) }
 
   describe 'GET #index' do

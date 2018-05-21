@@ -1,4 +1,4 @@
-class BookController < ApiController
+class BooksController < ApiController
   include Wor::Paginate
 
   before_action :authenticate_user!, only: %i[show index]
