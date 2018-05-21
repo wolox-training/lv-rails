@@ -4,22 +4,41 @@ describe BookController do
   let!(:books) { create_list(:book, 3) }
 
   describe 'GET #index' do
-    context 'Unusual params' do
+    context 'With an unauthenticated user' do
+      it 'returns an unauthorized status' do
+        get :index, params: {}
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'With an authenticated user' do
       include_context 'Authenticated User'
-      it 'without params' do
-        expect { get :index }.to raise_error ActionController::ParameterMissing
+
+      it 'without params returns all books' do
+        get :index
+        expect(JSON.parse(response.body)['total_count']).to eq(books.size)
       end
 
-      it 'with an empty book param' do
-        expect { get :index, params: { book: {} } }.to raise_error ActionController::ParameterMissing
+      it 'returns a 200 ok status' do
+        get :index, params: { book: { genre: books.first.genre } }
+        expect(response).to have_http_status(:ok)
+      end
+
+      def unique_title
+        rnd_title = Faker::Book.title
+        rnd_title = Faker::Book.title while books.map(&:title).include?(rnd_title)
+        rnd_title
+      end
+
+      it 'params filters not exists' do
+        get :index, params: { book: { title: unique_title } }
+        expect(JSON.parse(response.body)['total_count']).to eq(0)
       end
 
       def full_index_response
         b = books.first
         get :index, params: { book: {
-          genre: b.genre,
           title: b.title,
-          author: b.author,
           # Below are additional params
           image: b.image,
           publisher: b.publisher,
@@ -27,49 +46,39 @@ describe BookController do
         } }
       end
 
-      it 'adding additional params' do
+      it 'setting additionals params' do
         full_index_response
         expect(response).to have_http_status(:ok)
-      end
-    end
-
-    def index_response
-      b = books.first
-      get :index, params: { book: {
-        genre: b.genre,
-        title: b.title,
-        author: b.author
-      } }
-    end
-
-    context 'With an authenticated user' do
-      include_context 'Authenticated User'
-      it 'returns a 200 ok status' do
-        index_response
-        expect(response).to have_http_status(:ok)
-      end
-    end
-
-    context 'With an unauthenticated user' do
-      it 'returns an unauthorized status' do
-        index_response
-        expect(response).to have_http_status(:unauthorized)
+        # it response status ok becouse additionals params are not used
       end
     end
   end
 
   describe 'GET #show' do
-    include_context 'Authenticated User'
-    it 'Without params' do
-      expect { get :show }.to raise_error ActionController::ParameterMissing
+    context 'With an unauthenticated user' do
+      it 'returns an unauthorized status' do
+        get :show, params: {}
+        expect(response).to have_http_status(:unauthorized)
+      end
     end
 
-    before do
-      get :show, params: { book: { id: books.first.id } }
-    end
+    context 'With an authenticated user' do
+      include_context 'Authenticated User'
 
-    it 'responds with 200 status' do
-      expect(response).to have_http_status(:ok)
+      it 'responds with 200 status' do
+        get :show, params: { book: { id: books.first.id } }
+        expect(response).to have_http_status(:ok)
+      end
+
+      def unique_id
+        rnd_id = Faker::Number.number(10)
+        rnd_id = Faker::Number.number(10) while books.map(&:id).include?(rnd_id)
+        rnd_id
+      end
+
+      it 'With an incorrect id' do
+        expect { get :show, params: { book: { id: unique_id } } }.to raise_error ActiveRecord::RecordNotFound
+      end
     end
   end
 end
