@@ -16,7 +16,7 @@ Documentation:
   Enabled: false
 
 LineLength:
-  Max: 110
+  Max: 99
 
 HasAndBelongsToMany:
   Enabled: false
@@ -45,4 +45,4 @@ RSpec/MultipleExpectations:
   Enabled: false
 
 RSpec/NestedGroups:
-  Max: 3
+  Max: 5
