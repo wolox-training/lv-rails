@@ -19,6 +19,12 @@ describe BooksController do
           get :index, params: { book: { genre: books.first.genre } }
           expect(response).to have_http_status(:ok)
         end
+
+        it 'returns the correct filtered collection' do
+          b = books.first
+          get :index, params: { book: { title: b.title, image: b.image, publisher: b.publisher, year: b.year } } # rubocop:disable Metrics/LineLength
+          expect(JSON.parse(response.body)['page'].first['title']).to eq(b.title)
+        end
       end
 
       context 'without params' do
@@ -32,16 +38,6 @@ describe BooksController do
         it 'returns empty response' do
           get :index, params: { book: { title: 'HY43Ewcqw!$ds1' } }
           expect(JSON.parse(response.body)['total_count']).to eq(0)
-        end
-      end
-
-      context 'with additionals params' do
-        it 'additionals params are not used' do
-          b = books.first
-          get :index, params: { book: { title: b.title,
-                                        image: b.image, publisher: b.publisher, year: b.year } }
-          book_response = Book.new(JSON.parse(response.body)['page'][0])
-          expect(book_response.title).to be_eql(books.first.title)
         end
       end
     end
