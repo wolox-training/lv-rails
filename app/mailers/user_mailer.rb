@@ -6,9 +6,16 @@ class UserMailer < ApplicationMailer
           port: Rails.application.secrets.user_mail_port,
           authentication: Rails.application.secrets.user_mail_authentication.to_sym
 
-  def welcome_email
-    @user = params[:user]
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+  def new_record_notification(record)
+    # The email data should be:
+
+    # Actual date of rent creation
+    # Book detail
+    # Date from and date to of the rent
+    # El email debe estar maquetado
+
+    @record = record
+    mail to: "recipient@MYDOMAIN.com", 
+         subject: "Success! You did it."
   end
 end
