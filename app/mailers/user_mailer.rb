@@ -15,7 +15,7 @@ class UserMailer < ApplicationMailer
     # El email debe estar maquetado
 
     @record = record
-    mail to: "recipient@MYDOMAIN.com", 
-         subject: "Success! You did it."
+    mail to: 'recipient@MYDOMAIN.com',
+         subject: 'Success! You did it.'
   end
 end
