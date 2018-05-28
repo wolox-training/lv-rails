@@ -8,6 +8,10 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'support/factory_bot'
 
+# sidekiq
+require 'sidekiq/testing'
+Sidekiq::Testing.fake!  # by default it is fake
+
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
