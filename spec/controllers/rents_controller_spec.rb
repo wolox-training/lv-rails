@@ -14,7 +14,7 @@ describe RentsController do
     context 'With an authenticated user' do
       include_context 'Authenticated User'
 
-      it 'without params returns all rents' do
+      it 'returns all rents' do
         get :index
         expect(JSON.parse(response.body)['total_count']).to eq(rents.size)
       end
@@ -24,10 +24,12 @@ describe RentsController do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'incorrect params returns empty response' do
-        date = Date.new(2017, 5, 28) # Rent factory shouldn't include 2017
-        get :index, params: { rent: { from: date } }
-        expect(JSON.parse(response.body)['total_count']).to eq(0)
+      context 'With incorrect params' do
+        it 'returns empty response' do
+          date = Date.new(2017, 5, 28) # Rent factory shouldn't include 2017
+          get :index, params: { rent: { from: date } }
+          expect(JSON.parse(response.body)['total_count']).to eq(0)
+        end
       end
     end
   end
@@ -36,13 +38,6 @@ describe RentsController do
     context 'With an unauthenticated user' do
       it 'returns an unauthorized status' do
         post :create, params: { rent: create(:rent) }
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'With an unauthentucated user and incorrect params' do
-        rent = create(:rent)
-        rent.user = nil
-        post :create, params: { rent: rent }
         expect(response).to have_http_status(:unauthorized)
       end
     end

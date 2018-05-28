@@ -4,7 +4,7 @@ class RentsController < ApplicationController
   before_action :authenticate_user!, only: %i[create index]
 
   def create
-    rent = current_user.rent.build(create_params)
+    rent = current_user.rents.build(create_params)
     if rent.save
       render json: rent, status: :created
     else
@@ -24,6 +24,6 @@ class RentsController < ApplicationController
   private
 
   def create_params
-    params.require(:rent).permit(:from, :to, :user_id, :book_id)
+    params.require(:rent).permit(:from, :to, :book_id)
   end
 end
