@@ -56,10 +56,9 @@ describe RentsController do
       it 'We have 4 jobs pendings' do
         r = create(:rent)
         post :create, params: { rent: { book_id: r.book, from: r.from, to: r.to } }
-        expect(Sidekiq::Worker.jobs.size).to eq(2+2)
+        expect(Sidekiq::Worker.jobs.size).to eq(2 + 2)
         # 2 jobs for this test and 2 jobs for previous test
       end
-
 
       context 'missing foreign keys' do
         it 'missing user_id use current_user' do
