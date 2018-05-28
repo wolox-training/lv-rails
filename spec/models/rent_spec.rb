@@ -12,19 +12,10 @@ describe Rent do
 
   it { expect(rent.from).to be <= rent.to }
 
-  context '#validates' do
-    def swap_from_to(rent)
-      aux = rent.from
-      rent.from = rent.to
-      rent.to = aux
-    end
-
-    it 'date from is bigger than date to' do
-      rent = create(:rent)
-      swap_from_to(rent)
-      expect { rent.validate! }.to  \
-        raise_error(ActiveRecord::RecordInvalid, \
-                    'Validation failed: To Date from must be less than date to')
-    end
+  it '#validate_date_from_is_less_than_date_to' do
+    rent = create(:rent)
+    rent.from = Date.new(2018, 1, 20)
+    rent.to = Date.new(2018, 1, 10) # Smaller than from
+    expect { rent.validate! }.to raise_error(ActiveRecord::RecordInvalid, 'Validation failed: To Date from must be less than date to') # rubocop:disable Metrics/LineLength
   end
 end

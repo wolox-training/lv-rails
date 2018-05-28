@@ -24,14 +24,9 @@ describe RentsController do
         expect(response).to have_http_status(:ok)
       end
 
-      def unique_date
-        date = Faker::Date.backward(50)
-        date = Faker::Date.backward(50) while rents.map(&:from).include?(date)
-        date
-      end
-
       it 'incorrect params returns empty response' do
-        get :index, params: { rent: { from: unique_date } }
+        date = Date.new(2017, 5, 28) # Rent factory shouldn't include 2017
+        get :index, params: { rent: { from: date } }
         expect(JSON.parse(response.body)['total_count']).to eq(0)
       end
     end
@@ -55,28 +50,26 @@ describe RentsController do
     context 'With an authenticated user' do
       include_context 'Authenticated User'
 
-      def rent_hash
-        rent = create(:rent)
-        Hash.new(
-          user: rent.user,
-          book: rent.book,
-          from: rent.from,
-          to: rent.to
-        )
-      end
-
       it 'returns a 201 ok status' do
         # 201: The request has been fulfilled and has resulted
         # in one or more new resources being created.
-        post :create, params: { rent: rent_hash }
+        r = create(:rent)
+        post :create, params: { rent: { user_id: r.user, book_id: r.book, from: r.from, to: r.to } } # rubocop:disable Metrics/LineLength
         expect(response).to have_http_status(:created)
       end
 
-      it 'missing user foreign keys' do
-        hash = rent_hash
-        hash[user] = nil
-        expect { post :create, params: { rent: hash } }.to \
-          raise_error ActiveModel::ForbiddenAttributesError
+      context 'missing foreign keys' do
+        it 'missing user_id use current_user' do
+          r = create(:rent)
+          post :create, params: { rent: { user_id: nil, book_id: r.book, from: r.from, to: r.to } }
+          expect(response).to have_http_status(:created)
+        end
+
+        it 'missing book_id not works' do
+          r = create(:rent)
+          post :create, params: { rent: { user_id: nil, book_id: nil, from: r.from, to: r.to } }
+          expect(response).to have_http_status(:unprocessable_entity)
+        end
       end
     end
   end
