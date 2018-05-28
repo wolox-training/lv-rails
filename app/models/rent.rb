@@ -1,4 +1,6 @@
 class Rent < ApplicationRecord
+  include Filterable
+
   belongs_to :user
   belongs_to :book
 
