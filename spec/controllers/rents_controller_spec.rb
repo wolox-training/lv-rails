@@ -49,8 +49,14 @@ describe RentsController do
         # 201: The request has been fulfilled and has resulted
         # in one or more new resources being created.
         r = create(:rent)
-        post :create, params: { rent: { user_id: r.user, book_id: r.book, from: r.from, to: r.to } } # rubocop:disable Metrics/LineLength
+        post :create, params: { rent: { book_id: r.book, from: r.from, to: r.to } }
         expect(response).to have_http_status(:created)
+      end
+
+      it 'returns 2 jobs pendings' do
+        r = create(:rent)
+        post :create, params: { rent: { book_id: r.book, from: r.from, to: r.to } }
+        expect(Sidekiq::Worker.jobs.size).to eq(2)
       end
 
       context 'missing foreign keys' do

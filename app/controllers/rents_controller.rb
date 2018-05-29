@@ -6,6 +6,7 @@ class RentsController < ApplicationController
   def create
     rent = current_user.rents.build(create_params)
     if rent.save
+      send_mails(rent)
       render json: rent, status: :created
     else
       render json: { errors: rent.errors.messages }, status: :unprocessable_entity
@@ -19,6 +20,11 @@ class RentsController < ApplicationController
               Rent.all
             end
     render_paginated rents, each_serializer: RentSerializer
+  end
+
+  def send_mails(rent)
+    RentMailer.new_rent_notification(rent.id).deliver_later
+    RentNotificationWorker.perform_in((rent.to - rent.from).days, rent.id)
   end
 
   private
