@@ -53,11 +53,10 @@ describe RentsController do
         expect(response).to have_http_status(:created)
       end
 
-      it 'We have 4 jobs pendings' do
+      it 'returns 2 jobs pendings' do
         r = create(:rent)
         post :create, params: { rent: { book_id: r.book, from: r.from, to: r.to } }
-        expect(Sidekiq::Worker.jobs.size).to eq(2 + 2)
-        # 2 jobs for this test and 2 jobs for previous test
+        expect(Sidekiq::Worker.jobs.size).to eq(2)
       end
 
       context 'missing foreign keys' do
