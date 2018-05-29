@@ -5,6 +5,6 @@ FactoryBot.define do
     email { "#{first_name}.#{last_name}@wolox.com.ar".downcase }
     password 'password1234'
     password_confirmation 'password1234'
-    locale 'es'
+    locale 'en'
   end
 end

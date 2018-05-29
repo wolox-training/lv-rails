@@ -1,0 +1,11 @@
+es:
+  hello: "Hola mundo"
+  new_rent_notification_user_text: 'Usuario: '
+  new_rent_notification_rents_text: 'Alquilo el libro: '
+  new_rent_notification_from_text: 'Desde el dia: '
+  new_rent_notification_to_text: 'Hasta el dia: '
+  rent_expiration_mail_notification_warning_text: 'Cuidado!!'
+  rent_expiration_mail_notification_consequence_text: 'y el alquiler finaliza el dia: ' 
+  new_rent_notification_header_text: >
+    Hola, este correo electronico tiene el proposito de notificarle sobre un nuevo alquiler.
+    No es necesario responderlo. Se adjunta el detalle del alquiler.

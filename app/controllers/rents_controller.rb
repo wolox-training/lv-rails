@@ -6,6 +6,7 @@ class RentsController < ApplicationController
   def create
     rent = current_user.rents.build(create_params)
     if rent.save
+      translate(rent)
       send_mails(rent)
       render json: rent, status: :created
     else
@@ -25,6 +26,10 @@ class RentsController < ApplicationController
   def send_mails(rent)
     RentMailer.new_rent_notification(rent.id).deliver_later
     RentNotificationWorker.perform_in((rent.to - rent.from).days, rent.id)
+  end
+
+  def translate(rent)
+    I18n.locale = rent.user.locale || I18n.default_locale
   end
 
   private
