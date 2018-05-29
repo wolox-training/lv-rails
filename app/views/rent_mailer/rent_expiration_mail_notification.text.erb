@@ -1,3 +1,3 @@
-<%= t('rent_expiration_mail_notification_warning_text') %>
-<%= t('rent_expiration_mail_notification_did_text') %> <%= @rent.book.title %> 
-<%= t('rent_expiration_mail_notification_consequence_text') %> <%= @rent.to %>
+<%= t('rent_expiration_mail_notification.warning_text') %>
+<%= "#{t('rent_expiration_mail_notification.did_text')}#{@rent.book.title}" %>
+<%= "#{t('rent_expiration_mail_notification.consequence_text')}#{@rent.to}" %>
