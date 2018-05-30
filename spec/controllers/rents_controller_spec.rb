@@ -40,8 +40,8 @@ describe RentsController do
               false
             end
           end
-          expect { get :index, params: { rent: { user: rents.first.user } } }.to \
-            raise_error(Pundit::NotAuthorizedError)
+          get :index
+          expect(response).to have_http_status(:forbidden)
         end
       end
     end
