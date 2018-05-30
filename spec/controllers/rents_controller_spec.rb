@@ -31,6 +31,19 @@ describe RentsController do
           expect(JSON.parse(response.body)['total_count']).to eq(0)
         end
       end
+
+      context 'Without user.id' do
+        it 'returns forbidden error' do # rubocop:disable ExampleLength
+          # I need to open class becouse an user.id never must be nil
+          class RentPolicy < ApplicationPolicy
+            def index?
+              false
+            end
+          end
+          expect { get :index, params: { rent: { user: rents.first.user } } }.to \
+            raise_error(Pundit::NotAuthorizedError)
+        end
+      end
     end
   end
 

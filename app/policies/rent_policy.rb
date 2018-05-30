@@ -6,13 +6,8 @@ class RentPolicy < ApplicationPolicy
     @rent = rent
   end
 
-  # Until now anyone can create a rent
-  def create
-    true
-  end
-
   # User must only index yours rents
-  def index
-    true
+  def index?
+    user.id.present?
   end
 end

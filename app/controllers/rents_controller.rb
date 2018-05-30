@@ -15,23 +15,16 @@ class RentsController < ApplicationController
 
   def index
     rents = index_collection
-    authorize_and_render(rents)
+    authorize rents
+    render_paginated rents, each_serializer: RentSerializer
   end
 
   private
 
   def index_collection
-    rents = if params['rent'].present?
-              Rent.filter(param_index)
-            else
-              Rent.all
-            end
+    rents = Rent.filter(param_index) if params['rent'].present?
+    rents ||= Rent.all
     rents
-  end
-
-  def authorize_and_render(rents)
-    # authorize rents
-    render_paginated rents, each_serializer: RentSerializer
   end
 
   def param_index
