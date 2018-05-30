@@ -1,7 +1,7 @@
 <%= t('new_rent_notification.header_text') %>
 
-<%= "#{t('new_rent_notification.user_text')}#{@rent.user.first_name} #{@rent.user.last_name}" %>
-<%= "#{t('new_rent_notification.rents_text')}#{@rent.book.title} " %>
-<%= "#{t('new_rent_notification.from_text')}#{@rent.from}" %>
-<%= "#{t('new_rent_notification.to_text')}#{@rent.to}" %>
+<%= t('new_rent_notification.user_text', user_first_name: @rent.user.first_name, user_last_name: @rent.user.last_name) %>
+<%= t('new_rent_notification.rents_text', book_tittle: @rent.book.title) %> 
+<%= t('new_rent_notification.from_text', from_date: @rent.from) %> 
+<%= t('new_rent_notification.to_text', to_date: @rent.to) %> 
   

@@ -1,16 +1,16 @@
 en:
   hello: "Hello world"
   new_rent_notification:
-    user_text: 'User: '
-    rents_text: 'Rents the book: '
-    from_text: 'From date: '
-    to_text: 'To date: '
+    user_text: "User: %{user_first_name} %{user_last_name}"
+    rents_text: "Rents the book: %{book_tittle}"
+    from_text: "From date: %{from_date}"
+    to_text: "To date: %{to_date}" 
     header_text: >
       Hi, this email has the purpose of notifying you of a new rent. 
       It's not necessary to respond this email. The rental is detailed below
   
   rent_expiration_mail_notification:
     warning_text: 'Be carefull!!'
-    did_text: 'You rented a book: '
-    consequence_text: 'and rent ends: ' 
+    did_text: 'You rented a book: %{book_tittle}'
+    consequence_text: 'and rent ends: %{to_date}' 
   

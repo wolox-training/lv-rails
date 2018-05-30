@@ -5,6 +5,6 @@ class ApiController < ActionController::Base
   before_action :locale_translate
 
   def locale_translate
-    I18n.locale = I18n.default_locale || (current_user.locale if current_user.present?)
+    I18n.locale = current_user&.locale || I18n.default_locale
   end
 end
