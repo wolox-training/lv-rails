@@ -1,11 +1,7 @@
-Hi, this email has the purpose of notifying you of a new rent.
-It's not necessary to respond this email.
+<%= t('new_rent_notification.header_text') %>
 
-A new rent has been added
-=========================
-User: <%= @rent.user.first_name %> <%= @rent.user.last_name %>
-Rents the book: <%= @rent.book.title %> - <%= @rent.book.author %>
-From date: <%= @rent.from %>
-To date: <%= @rent.to %>
-
-Thanks
+<%= t('new_rent_notification.user_text', user_first_name: @rent.user.first_name, user_last_name: @rent.user.last_name) %>
+<%= t('new_rent_notification.rents_text', book_tittle: @rent.book.title, book_author: @rent.book.author) %> 
+<%= t('new_rent_notification.from_text', from_date: @rent.from) %> 
+<%= t('new_rent_notification.to_text', to_date: @rent.to) %> 
+  

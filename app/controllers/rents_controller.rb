@@ -22,12 +22,12 @@ class RentsController < ApplicationController
     render_paginated rents, each_serializer: RentSerializer
   end
 
+  private
+
   def send_mails(rent)
     RentMailer.new_rent_notification(rent.id).deliver_later
     RentNotificationWorker.perform_in((rent.to - rent.from).days, rent.id)
   end
-
-  private
 
   def create_params
     params.require(:rent).permit(:from, :to, :book_id)

@@ -11,6 +11,7 @@ AllCops:
     - docs/**/*
     - config/**/*
     - bin/**/*
+  TargetRubyVersion: 2.3
 
 Documentation:
   Enabled: false
