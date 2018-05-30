@@ -2,7 +2,7 @@ en:
   hello: "Hello world"
   new_rent_notification:
     user_text: "User: %{user_first_name} %{user_last_name}"
-    rents_text: "Rents the book: %{book_tittle}"
+    rents_text: "Rents the book: %{book_tittle} - %{book_author}"
     from_text: "From date: %{from_date}"
     to_text: "To date: %{to_date}" 
     header_text: >
@@ -11,6 +11,6 @@ en:
   
   rent_expiration_mail_notification:
     warning_text: 'Be carefull!!'
-    did_text: 'You rented a book: %{book_tittle}'
-    consequence_text: 'and rent ends: %{to_date}' 
+    did_text: "You rented a book: %{book_tittle}"
+    consequence_text: "and rent ends: %{to_date}" 
   

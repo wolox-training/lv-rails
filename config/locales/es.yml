@@ -1,15 +1,15 @@
 es:
   hello: "Hola mundo"
   new_rent_notification: 
-    user_text: 'Usuario: %{user_first_name} %{user_last_name}'
-    rents_text: 'Alquilo el libro: %{book_tittle}'
-    from_text: 'Desde el dia: %{from_date}'
-    to_text: 'Hasta el dia: %{to_date}'
+    user_text: "Usuario: %{user_first_name} %{user_last_name}"
+    rents_text: "Alquilo el libro: %{book_tittle} - %{book_author}"
+    from_text: "Desde el dia: %{from_date}"
+    to_text: "Hasta el dia: %{to_date}"
     header_text: >
       Hola, este correo electronico tiene el proposito de notificarle sobre un nuevo alquiler.
       No es necesario responderlo. Se adjunta el detalle del alquiler.
   
   rent_expiration_mail_notification:
     warning_text: 'Cuidado!!'
-    did_text: 'Alquilaste el libro: %{book_tittle}'
-    consequence_text: 'y el alquiler finaliza el dia: %{to_date}' 
+    did_text: "Alquilaste el libro: %{book_tittle}"
+    consequence_text: "y el alquiler finaliza el dia: %{to_date}"
