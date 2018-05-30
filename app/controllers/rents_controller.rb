@@ -14,15 +14,29 @@ class RentsController < ApplicationController
   end
 
   def index
-    rents = if params['rent'].present?
-              Rent.filter(params.require(:rent).permit(%i[user book from to]))
-            else
-              Rent.all
-            end
-    render_paginated rents, each_serializer: RentSerializer
+    rents = index_collection
+    authorize_and_render(rents)
   end
 
   private
+
+  def index_collection
+    rents = if params['rent'].present?
+              Rent.filter(param_index)
+            else
+              Rent.all
+            end
+    rents
+  end
+
+  def authorize_and_render(rents)
+    # authorize rents
+    render_paginated rents, each_serializer: RentSerializer
+  end
+
+  def param_index
+    params.require(:rent).permit(%i[user book from to])
+  end
 
   def send_mails(rent)
     RentMailer.new_rent_notification(rent.id).deliver_later
