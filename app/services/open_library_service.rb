@@ -22,6 +22,8 @@ class OpenLibraryService
   attr_accessor :isbn
 
   def book_data_hash(response) # rubocop:disable AbcSize, Metrics/MethodLength
+    raise ArgumentError, 'Incorrect ISBN' unless response.keys.include? "ISBN:#{isbn}"
+
     book_data = {}
     book_data[:isbn] = isbn
     book_data[:title] = response["ISBN:#{isbn}"]['title']
