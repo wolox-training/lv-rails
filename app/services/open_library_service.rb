@@ -1,32 +1,41 @@
 class OpenLibraryService
-  def book_info(url)
-    response = response_hash_parsed(url)
-    isbn = find_isbn_in(url)
+  cattr_accessor :base_url_endpoint
+  self.base_url_endpoint = 'https://openlibrary.org/'
 
-    title = extract_property(response, isbn, 'title')
-    subtitle = extract_property(response, isbn, 'subtitle')
-    number_of_pages = extract_property(response, isbn, 'number_of_pages')
+  def book_info(isbn) # rubocop:disable Metrics/MethodLength
+    @isbn = isbn.to_s.rjust(10, '0')
 
-    authors_list_hash = extract_property(response, isbn, 'authors')
-    authors = authors_list_hash.map { |author| author['name'] }.to_a
-
-    Hash.new(isbn: isbn, title: title, subtitle: subtitle, \
-             number_of_pages: number_of_pages, authors: authors)
+    response = HTTParty.get(self.class.base_url_endpoint + post_parameters(isbn), \
+                            headers: { 'Content-Type' => 'application/json' })
+    case response.code
+    when 422
+      InvalidLibrary.new
+    when 200..299
+      book_data_hash(JSON.parse(response))
+    else
+      raise UnhandledResponseError
+    end
   end
 
   private
 
-  def response_hash_parsed(url)
-    response = HTTParty.get(url, format: :plain)
-    JSON.parse response
+  attr_accessor :isbn
+
+  def book_data_hash(response) # rubocop:disable AbcSize, Metrics/MethodLength
+    book_data = {}
+    book_data[:isbn] = isbn
+    book_data[:title] = response["ISBN:#{isbn}"]['title']
+    book_data[:subtitle] = response["ISBN:#{isbn}"]['subtitle']
+    book_data[:number_of_pages] = response["ISBN:#{isbn}"]['number_of_pages']
+    book_data[:authors] = if response["ISBN:#{isbn}"]['authors'].present?
+                            response["ISBN:#{isbn}"]['authors'].map { |author| author['name'] }.to_a # rubocop:disable Metrics/LineLength
+                          else
+                            []
+                          end
+    book_data
   end
 
-  def find_isbn_in(url)
-    response = response_hash_parsed(url)
-    response.keys.select { |key| key.include?('ISBN') }.first
-  end
-
-  def extract_property(hash_parsed, isbn, string_property)
-    hash_parsed[isbn][string_property]
+  def post_parameters(isbn)
+    "api/books?bibkeys=ISBN:#{isbn}&format=json&jscmd=data"
   end
 end
