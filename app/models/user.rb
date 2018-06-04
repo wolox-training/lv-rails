@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :locale, inclusion: { in: I18n.available_locales.map(&:to_s) }, if: -> { locale.present? } # rubocop:disable Metrics/LineLength
+  validates :locale, inclusion: { in: I18n.available_locales.map(&:localeto_s) }, if: -> { locale.present? } # rubocop:disable Metrics/LineLength
 
   has_many :rents, dependent: :destroy
 end
