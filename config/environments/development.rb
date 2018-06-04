@@ -40,12 +40,12 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    domain: Rails.application.secrets.user_mail_domain,
-    password: Rails.application.secrets.user_mail_password,
-    user_name: Rails.application.secrets.user_mail_user_name,
-    address: Rails.application.secrets.user_mail_address,
-    port: Rails.application.secrets.user_mail_port,
-    authentication: Rails.application.secrets.user_mail_authentication.to_sym
+    domain: Rails.application.secrets.user_mail[:domain],
+    password: Rails.application.secrets.user_mail[:password],
+    user_name: Rails.application.secrets.user_mail[:user_name],
+    address: Rails.application.secrets.user_mail[:address],
+    port: Rails.application.secrets.user_mail[:port],
+    authentication: Rails.application.secrets.user_mail[:authentication].to_sym
   }
 
   # Print deprecation notices to the Rails logger.
