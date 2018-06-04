@@ -6,8 +6,12 @@ class RentPolicy < ApplicationPolicy
     @rent = rent
   end
 
-  # User must only index yours rents
   def index?
-    user.id.present?
+    # the variable name is "rent" but it contains a collection
+    rent.to_a.all? { |record| record.user_id == user.id }
+  end
+
+  def show?
+    rent.user_id == user.id
   end
 end

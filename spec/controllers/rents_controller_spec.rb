@@ -32,18 +32,10 @@ describe RentsController do
         end
       end
 
-      context 'Without user.id' do
-        it 'returns forbidden error' do # rubocop:disable ExampleLength
-          # I need to open class becouse an user.id never must be nil
-          class RentPolicy < ApplicationPolicy
-            def index?
-              false
-            end
-          end
-          get :index
-          expect(response).to have_http_status(:forbidden)
-        end
-      end
+      # Try to access to a record belonging to another user,
+      #   that should return a :forbidden response
+      # Try to access to a record belonging to the logged in user,
+      #   that should return that record serialized.
     end
   end
 

@@ -1,7 +1,7 @@
 class RentsController < ApplicationController
   include Wor::Paginate
 
-  before_action :authenticate_user!, only: %i[create index]
+  before_action :authenticate_user!
 
   def create
     rent = current_user.rents.build(create_params)
@@ -15,20 +15,29 @@ class RentsController < ApplicationController
 
   def index
     rents = index_collection
-    authorize rents
     render_paginated rents, each_serializer: RentSerializer
+  end
+
+  def show
+    rent = Rent.find(params[:id])
+    authorize rent
+
+    render json: rent
   end
 
   private
 
   def index_collection
-    rents = Rent.filter(param_index) if params['rent'].present?
-    rents ||= Rent.all
+    rents = if params['rent'].present?
+              Rent.filter(param_index)
+            else
+              Rent.all
+            end
     rents
   end
 
   def param_index
-    params.require(:rent).permit(%i[user book from to])
+    params.require(:rent).permit(%i[user_id book_id from to])
   end
 
   def send_mails(rent)
