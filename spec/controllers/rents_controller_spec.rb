@@ -45,6 +45,16 @@ describe RentsController do
     context 'With an authenticated user' do
       include_context 'Authenticated User'
 
+      def rent_hash
+        rent = create(:rent)
+        Hash.new(
+          user: rent.user,
+          book: rent.book,
+          from: rent.from,
+          to: rent.to
+        )
+      end
+
       it 'returns a 201 ok status' do
         # 201: The request has been fulfilled and has resulted
         # in one or more new resources being created.
